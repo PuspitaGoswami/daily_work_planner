@@ -20,11 +20,20 @@ $(document).ready(function () {
     } else {
       timeBlocks[i].classList.add("future");
     }
+      // Retrieve saved event data for this timeblock
+      var savedData = localStorage.getItem("timeBlock" + i);
+      if (savedData) {
+        $(timeBlocks[i]).find(".description").val(savedData);
+      }
   }
   //Save button Clicked
   var submit = $(".saveBtn");
-  submit.on("click", () => {
-    var description = $(".description").val();
-    localStorage.setItem("description", JSON.stringify(description));
+  submit.on("click", function() {
+    // Get the index of the time block
+    var index = $(this).closest(".time-block").index();
+    // Get the description from the input field
+    var description = $(this).siblings(".description").val();
+    // Save the description in local storage
+    localStorage.setItem("timeBlock" + index, description);
   });
 });
