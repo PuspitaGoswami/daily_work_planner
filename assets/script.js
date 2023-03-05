@@ -1,22 +1,30 @@
 $(document).ready(function () {
+  //Get the current date
   var currentDate = moment().format("dddd, MMMM Do");
   $("#currentDay").text(currentDate);
 
   // Get the current hour using moment.js
-  var currentHour = moment().hours();
+  var currentHour = moment().format('hA');
+  //console.log(currentHour);
+  
 
-  // Loop over each time block
-  $(".time-block").each(function () {
-    // Get the hour for this time block by parsing the text of the span element
-    var blockHour = parseInt($(this).find(".hour").text().trim().split(" ")[0]);
-
-    // Add the appropriate class to the time block based on whether it represents a past, present, or future hour
+  var timeBlocks = $(".time-block");
+  
+  for (var i = 0; i < timeBlocks.length; i++) {
+    var blockHour = timeBlocks[i].children[0].textContent;
+    //console.log(blockHour);
     if (blockHour < currentHour) {
-      $(this).addClass("past");
+      timeBlocks[i].classList.add("past");
     } else if (blockHour === currentHour) {
-      $(this).addClass("present");
+      timeBlocks[i].classList.add("present");
     } else {
-      $(this).addClass("future");
+      timeBlocks[i].classList.add("future");
     }
+  }
+  //Save button Clicked
+  var submit = $(".saveBtn");
+  submit.on("click", () => {
+    var description = $(".description").val();
+    localStorage.setItem("description", JSON.stringify(description));
   });
 });
