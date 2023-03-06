@@ -2,7 +2,7 @@
 
 This is a simple daily planner web application that allows users to input and save events for each hour of the day.
 
-https://github.com/PuspitaGoswami/daily_work_planner
+ https://puspitagoswami.github.io/daily_work_planner/
 
 ## Features
 - Displays the current date at the top of the page.
