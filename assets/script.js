@@ -5,6 +5,7 @@ $(document).ready(function () {
 
   // Get the current hour using moment.js
   var currentHour = moment().format('hA');
+  var currentHour24 = moment(currentHour, 'ha').hour();
   //console.log(currentHour);
   
 
@@ -12,10 +13,10 @@ $(document).ready(function () {
   
   for (var i = 0; i < timeBlocks.length; i++) {
     var blockHour = timeBlocks[i].children[0].textContent;
-    //console.log(blockHour);
-    if (blockHour < currentHour) {
+    var blockHour24 = moment(blockHour, 'ha').hour();
+    if (blockHour24 < currentHour24) {
       timeBlocks[i].classList.add("past");
-    } else if (blockHour === currentHour) {
+    } else if (blockHour24 === currentHour24) {
       timeBlocks[i].classList.add("present");
     } else {
       timeBlocks[i].classList.add("future");
